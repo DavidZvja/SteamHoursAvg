@@ -9,5 +9,6 @@ Enter names and hours of corresponding games
 
 Show entered games and hours aswell as the average playtime
 
+-----------------------------------------------------
 
 This program was made to practice the basics of Java
