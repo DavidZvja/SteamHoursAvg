@@ -12,8 +12,8 @@ public class SteamHoursAvg
                     
                     int gameamnt;
                     double avg;
-                    double sum;
                     String again;
+                    double sum;
 
 
                     do
