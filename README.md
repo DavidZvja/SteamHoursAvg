@@ -1,5 +1,7 @@
 # SteamHoursAvg
-This program calculates your average playtime in a given number of games. 
+This program calculates your average playtime in a given number of games.
+
+It also sums up all hours played in entered games.
 
 Features:
 
