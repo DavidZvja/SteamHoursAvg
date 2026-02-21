@@ -7,7 +7,7 @@ Set number of games to be used for calculation
 
 Enter names and hours of corresponding games
 
-Show entered games and hours aswell as the average playtime
+Show entered games and hours aswell as the average playtime and sum of hours played
 
 -----------------------------------------------------
 
