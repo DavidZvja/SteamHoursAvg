@@ -47,7 +47,7 @@ public class SteamHoursAvgMenu
                                         buffer=input.readLine();
                                         menu=Integer.parseInt(buffer);
 
-                                        if (menu==1)
+                                        if (menu==1 || menu==3)
                                         {
                                                   failCheck=true;
                                         }
@@ -59,7 +59,7 @@ public class SteamHoursAvgMenu
                                                   pressEnter(input);
                                                   Screen.clear();
                                         }
-                              } while (gameHours.size()<=1);  
+                              } while (failCheck==false);  
 
                               Screen.clear();
                               
