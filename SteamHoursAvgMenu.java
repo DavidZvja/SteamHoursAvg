@@ -70,9 +70,19 @@ public class SteamHoursAvgMenu
 
                                         gameName.add(gameNameEnter);
 
-                                        System.out.print("Type in playtime of game: ");
-                                        buffer=input.readLine();
-                                        gameHoursEnter=Double.parseDouble(buffer);
+                                        do
+                                        {
+                                                  System.out.print("Type in playtime of game: ");
+                                                  buffer=input.readLine();
+                                                  gameHoursEnter=Double.parseDouble(buffer);
+
+                                                  if (gameHoursEnter<0)
+                                                  {
+                                                            System.out.println("Hours played cannot be negative.");
+                                                            pressEnter(input);
+                                                            Screen.clear();
+                                                  }
+                                        } while(gameHoursEnter<0);
 
                                         gameHours.add(gameHoursEnter);
                               }
