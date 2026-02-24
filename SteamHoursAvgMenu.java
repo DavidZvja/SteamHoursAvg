@@ -22,6 +22,8 @@ public class SteamHoursAvgMenu
 
                     String gameNameEnter;
                     double gameHoursEnter;
+                    String gameNameMax="x";
+                    String gameNameMin="x";
                     
                     double avg;
                     double sum;
@@ -97,13 +99,38 @@ public class SteamHoursAvgMenu
                                         min=Calculate.ArrayListMin(gameHours);
                                         max=Calculate.ArrayListMax(gameHours);
 
-                                        System.out.println("Results: ");
-                                        System.out.println("-----------");
+                                        for (int i=0; i<gameHours.size(); i++)
+                                        {
+                                                  if (gameHours.get(i)==max)
+                                                  {
+                                                            gameNameMax=gameName.get(i);
+                                                  }
+                                        }
+
+                                        for (int i=0; i<gameHours.size(); i++)
+                                        {
+                                                  if (gameHours.get(i)==min)
+                                                  {
+                                                            gameNameMin=gameName.get(i);
+                                                  }
+                                        }
+
+                                        System.out.println("Games you have entered: ");
+                                        System.out.println();
+                                        
+                                        for (int i=0; i<gameName.size(); i++)
+                                        {
+                                                  System.out.println(gameName.get(i)+ " with "+gameHours.get(i)+" hours");
+                                        }
+
+                                        System.out.println();
+                                        System.out.println("Results:");
+                                        System.out.println();
 
                                         System.out.println("Average Playtime: "+avg);
                                         System.out.println("Sum of all hours played: "+sum);
-                                        System.out.println("Least played game: "+min);
-                                        System.out.println("Most played game: "+max);
+                                        System.out.println("Least played game is "+gameNameMin+" with "+ min+" hours");
+                                        System.out.println("Most played game is "+gameNameMax+" with "+ max+" hours");
 
                                         System.out.println();
                                         
