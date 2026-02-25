@@ -3,9 +3,7 @@ import java.util.ArrayList;
 public class SteamHoursAvgMenu
 {
           private static void pressEnter(BufferedReader input) throws IOException
-          {
-                    
-                    
+          {                   
                     System.out.println("Press enter to continue...");
                     
                     input.readLine();
@@ -24,6 +22,7 @@ public class SteamHoursAvgMenu
                     double gameHoursEnter;
                     String gameNameMax="x";
                     String gameNameMin="x";
+                    int gameRemove;
                     
                     double avg;
                     double sum;
@@ -38,10 +37,13 @@ public class SteamHoursAvgMenu
                     do
                     {         
                               do
-                              {        
+                              { 
+                                        //menu
+                                               
                                         System.out.println("1. Enter a game");
-                                        System.out.println("2. Display results");
-                                        System.out.println("3. Exit");
+                                        System.out.println("2. Remove a game");
+                                        System.out.println("3. Display results");
+                                        System.out.println("4. Exit");
                                                                      
                                         System.out.println();
                                         
@@ -49,7 +51,8 @@ public class SteamHoursAvgMenu
                                         buffer=input.readLine();
                                         menu=Integer.parseInt(buffer);
 
-                                        if (menu==1 || menu==3)
+                                        //check if game has been entered because checking results without entering causes a crash, needs to be changed due to game removal functionality not resetting the flag
+                                        if (menu==1 || menu==4)
                                         {
                                                   failCheck=true;
                                         }
@@ -67,6 +70,8 @@ public class SteamHoursAvgMenu
                               
                               if (menu==1)
                               {
+
+                                        // type in name of game and hours in said game
                                         System.out.print("Type in name of game: ");
                                         gameNameEnter=input.readLine();
 
@@ -93,34 +98,49 @@ public class SteamHoursAvgMenu
                               
                               if (menu==2)
                               {
+
+                                        //game removal, this isnt finished due to failchecking not being optimal
+                                        System.out.println("Which game would you like to remove? (Number)");
+
+                                        System.out.print("Game number: ");
                                         
+                                        buffer=input.readLine();
+                                        gameRemove=Integer.parseInt(buffer);
+
+                                        gameHours.remove(gameRemove-1);
+                                        gameName.remove(gameRemove-1);
+                              }
+                              
+                              if (menu==3)
+                              {
+                                        //calculation of results
                                         avg=Calculate.ArrayListAvg(gameHours);
                                         sum=Calculate.ArrayListSum(gameHours);
                                         min=Calculate.ArrayListMin(gameHours);
                                         max=Calculate.ArrayListMax(gameHours);
 
+                                        //finding names of min and max played games
                                         for (int i=0; i<gameHours.size(); i++)
                                         {
                                                   if (gameHours.get(i)==max)
                                                   {
                                                             gameNameMax=gameName.get(i);
                                                   }
-                                        }
 
-                                        for (int i=0; i<gameHours.size(); i++)
-                                        {
                                                   if (gameHours.get(i)==min)
                                                   {
                                                             gameNameMin=gameName.get(i);
                                                   }
                                         }
 
+
+                                        //results
                                         System.out.println("Games you have entered: ");
                                         System.out.println();
                                         
                                         for (int i=0; i<gameName.size(); i++)
                                         {
-                                                  System.out.println(gameName.get(i)+ " with "+gameHours.get(i)+" hours");
+                                                  System.out.println((i+1)+". game: "+gameName.get(i)+ " with "+gameHours.get(i)+" hours");
                                         }
 
                                         System.out.println();
@@ -139,6 +159,6 @@ public class SteamHoursAvgMenu
                               
                               Screen.clear();                                        
 
-                    } while(menu!=3);                                       
+                    } while(menu!=4);                                       
           }
 } 
