@@ -1,4 +1,5 @@
-###SteamHoursAvg
+SteamHoursAvg
+
 This program calculates your average playtime and other facts in a given number of games.
 
 
