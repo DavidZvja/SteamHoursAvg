@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.ArrayList;
+public class GameManager
+{
+          public static ArrayList<String> getName (BufferedReader input)throws IOException
+          {
+                    ArrayList<String> gameName = new ArrayList<String>();
+                    String gameNameEnter;          
+          
+                    System.out.print("Type in name of game: ");
+                    gameNameEnter=input.readLine();
+
+                    gameName.add(gameNameEnter);
+
+                    return new ArrayList<>(gameName);                            
+          }
+
+          public static ArrayList<Double> getHours (BufferedReader input)throws IOException
+          {
+                    String buffer;
+                    ArrayList<Double> gameHours = new ArrayList<Double>();
+                    double gameHoursEnter;
+
+                    do
+                    {         
+                              System.out.print("Type in playtime of game: ");
+                              buffer=input.readLine();
+                              gameHoursEnter=Double.parseDouble(buffer);
+
+                              if (gameHoursEnter<0)
+                              {
+                                        System.out.println("Hours played cannot be negative.");
+                                        SteamHoursAvgMenu.pressEnter(input);
+                                        Screen.clear();
+                              }
+                    } while(gameHoursEnter<0);
+
+                    gameHours.add(gameHoursEnter);
+                    
+                    return new ArrayList<>(gameHours);
+          }
+     
+}

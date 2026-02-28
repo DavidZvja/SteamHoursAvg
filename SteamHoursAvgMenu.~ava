@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 public class SteamHoursAvgMenu
 {
-          private static void pressEnter(BufferedReader input) throws IOException
+          public static void pressEnter(BufferedReader input) throws IOException
           {                   
                     System.out.println("Press enter to continue...");
                     
@@ -29,130 +29,120 @@ public class SteamHoursAvgMenu
                     double min;
                     double max;
                     int menu;
-                    boolean failCheck=false;
+
                           
                     System.out.println("Program to calculate average playtime in a given number of games.");
                     System.out.println("---------------");
 
                     do
-                    {         
-                              do
-                              { 
-                                        //menu
-                                               
-                                        System.out.println("1. Enter a game");
-                                        System.out.println("2. Remove a game");
-                                        System.out.println("3. Display results");
-                                        System.out.println("4. Exit");
-                                                                     
-                                        System.out.println();
-                                        
-                                        System.out.print("Choose: ");
-                                        buffer=input.readLine();
-                                        menu=Integer.parseInt(buffer);
-
-                                        //check if game has been entered because checking results without entering causes a crash, needs to be changed due to game removal functionality not resetting the flag
-                                        if (menu==1 || menu==4)
-                                        {
-                                                  failCheck=true;
-                                        }
-
-                                        if (failCheck==false)
-                                        {
-                                                  Screen.clear();
-                                                  System.out.println("Enter atleast 1 game.");      
-                                                  pressEnter(input);
-                                                  Screen.clear();
-                                        }
-                              } while (failCheck==false);  
-
+                    { 
+        
+                              //menu
+                    
+                              System.out.println("1. Enter a game");
+                              System.out.println("2. Remove a game");
+                              System.out.println("3. Display results");
+                              System.out.println("4. Exit");
+                                                           
+                              System.out.println();
+                              
+                              System.out.print("Choose: ");
+                              buffer=input.readLine();
+                              menu=Integer.parseInt(buffer);
+                              
+                                                                             
                               Screen.clear();
                               
                               if (menu==1)
                               {
-
-                                        // type in name of game and hours in said game
-                                        System.out.print("Type in name of game: ");
-                                        gameNameEnter=input.readLine();
-
-                                        gameName.add(gameNameEnter);
-
-                                        do
-                                        {
-                                                  System.out.print("Type in playtime of game: ");
-                                                  buffer=input.readLine();
-                                                  gameHoursEnter=Double.parseDouble(buffer);
-
-                                                  if (gameHoursEnter<0)
-                                                  {
-                                                            System.out.println("Hours played cannot be negative.");
-                                                            pressEnter(input);
-                                                            Screen.clear();
-                                                  }
-                                        } while(gameHoursEnter<0);
-
-                                        gameHours.add(gameHoursEnter);
+                                        // enter name of game
+                                        gameName = GameManager.getName(input);
+                                        // enter game hours
+                                        gameHours = GameManager.getHours(input);
                               }
 
                               Screen.clear();
                               
                               if (menu==2)
                               {
+                                        if (gameHours.size()>0)
+                                        {
+                                                  
+                                                  System.out.println("Which game would you like to remove? (Number)");
 
-                                        //game removal, this isnt finished due to failchecking not being optimal
-                                        System.out.println("Which game would you like to remove? (Number)");
+                                                  System.out.println();
 
-                                        System.out.print("Game number: ");
-                                        
-                                        buffer=input.readLine();
-                                        gameRemove=Integer.parseInt(buffer);
+                                                  for (int i=0; i<gameName.size(); i++)
+                                                  {
+                                                            System.out.println((i+1)+". game: "+gameName.get(i)+ " with "+gameHours.get(i)+" hours");
+                                                  }
 
-                                        gameHours.remove(gameRemove-1);
-                                        gameName.remove(gameRemove-1);
+                                                  System.out.println();
+
+                                                  System.out.print("Game number: ");
+                                                  
+                                                  buffer=input.readLine();
+                                                  gameRemove=Integer.parseInt(buffer);
+
+                                                  gameHours.remove(gameRemove-1);
+                                                  gameName.remove(gameRemove-1);
+                                        }
+                                        else
+                                        {
+                                                  System.out.println("Enter 1 game!");
+                                                  pressEnter(input);
+                                        }
                               }
                               
                               if (menu==3)
                               {
-                                        //calculation of results
-                                        avg=Calculate.ArrayListAvg(gameHours);
-                                        sum=Calculate.ArrayListSum(gameHours);
-                                        min=Calculate.ArrayListMin(gameHours);
-                                        max=Calculate.ArrayListMax(gameHours);
-
-                                        //finding names of min and max played games
-                                        for (int i=0; i<gameHours.size(); i++)
+                                        if (gameHours.size()>0)
                                         {
-                                                  if (gameHours.get(i)==max)
+                                                  //calculation of results
+                                                  avg=Calculate.ArrayListAvg(gameHours);
+                                                  sum=Calculate.ArrayListSum(gameHours);
+                                                  min=Calculate.ArrayListMin(gameHours);
+                                                  max=Calculate.ArrayListMax(gameHours);
+
+                                                  //finding names of min and max played games
+                                                  for (int i=0; i<gameHours.size(); i++)
                                                   {
-                                                            gameNameMax=gameName.get(i);
+                                                            if (gameHours.get(i)==max)
+                                                            {
+                                                                      gameNameMax=gameName.get(i);
+                                                            }
+
+                                                            if (gameHours.get(i)==min)
+                                                            {
+                                                                      gameNameMin=gameName.get(i);
+                                                            }
                                                   }
 
-                                                  if (gameHours.get(i)==min)
+
+                                                  //results
+                                                  System.out.println("Games you have entered: ");
+                                                  System.out.println();
+                                                  
+                                                  for (int i=0; i<gameName.size(); i++)
                                                   {
-                                                            gameNameMin=gameName.get(i);
+                                                            System.out.println((i+1)+". game: "+gameName.get(i)+ " with "+gameHours.get(i)+" hours");
                                                   }
+
+                                                  System.out.println();
+                                                  System.out.println("Results:");
+                                                  System.out.println();
+
+                                                  System.out.println("Average Playtime: "+avg);
+                                                  System.out.println("Sum of all hours played: "+sum);
+                                                  System.out.println("Least played game is "+gameNameMin+" with "+ min+" hours");
+                                                  System.out.println("Most played game is "+gameNameMax+" with "+ max+" hours");
+
+                                                  System.out.println();
                                         }
-
-
-                                        //results
-                                        System.out.println("Games you have entered: ");
-                                        System.out.println();
-                                        
-                                        for (int i=0; i<gameName.size(); i++)
+                                        else
                                         {
-                                                  System.out.println((i+1)+". game: "+gameName.get(i)+ " with "+gameHours.get(i)+" hours");
+                                                  System.out.println("Enter 1 game!");
                                         }
-
-                                        System.out.println();
-                                        System.out.println("Results:");
-                                        System.out.println();
-
-                                        System.out.println("Average Playtime: "+avg);
-                                        System.out.println("Sum of all hours played: "+sum);
-                                        System.out.println("Least played game is "+gameNameMin+" with "+ min+" hours");
-                                        System.out.println("Most played game is "+gameNameMax+" with "+ max+" hours");
-
-                                        System.out.println();
                                         
                                         pressEnter(input);
                               }
