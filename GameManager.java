@@ -2,9 +2,13 @@ import java.io.*;
 import java.util.ArrayList;
 public class GameManager
 {
+
+          private static ArrayList<String> gameName = new ArrayList<>();
+          private static ArrayList<Double> gameHours = new ArrayList<>();
+
           public static ArrayList<String> getName (BufferedReader input)throws IOException
           {
-                    ArrayList<String> gameName = new ArrayList<String>();
+                    
                     String gameNameEnter;          
           
                     System.out.print("Type in name of game: ");
@@ -18,7 +22,6 @@ public class GameManager
           public static ArrayList<Double> getHours (BufferedReader input)throws IOException
           {
                     String buffer;
-                    ArrayList<Double> gameHours = new ArrayList<Double>();
                     double gameHoursEnter;
 
                     do
